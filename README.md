@@ -53,11 +53,16 @@ The four-dimensional feature vector is derived from two complementary pathways t
 
 This pathway measures how confidently AI models process an image.
 
-### 🔹 Inpainting Accuracy (A)
-- A region of the image is intentionally masked.
-- A pretrained image inpainting model reconstructs the missing region.
-- Reconstruction fidelity is measured using **SSIM (Structural Similarity Index)**.
+### 🔹 Inpainting Accuracy (SSIM-based)
 
+Compute inpainting accuracy by comparing the original image with the inpainted (completed) image using **SSIM**:
+
+```bash
+python SSIM.py \
+  --original_dir /path/to/img_org \
+  --completed_dir /path/to/img_out \
+  --output_dir /path/to/output
+```
 **Observation:**  
 AI-generated images tend to be reconstructed with **unusually high accuracy** due to their structural regularity and lack of physical noise.
 
