@@ -111,12 +111,14 @@ python complexity.py \
 ``` 
 
 
-## ▶️ Run FakeImageScan (Excel Input & Output)
+### 🔹 Feature Fusion & Classification (SVM)
 
-FakeImageScan supports loading **precomputed feature vectors from an Excel file** and saving **classification results to a new Excel file**.
+Perform final classification by fusing all extracted features and training an **SVM with an RBF kernel**:
 
 ```bash
-python run_fakeimagescan.py \
-  --input_excel data/features.xlsx \
-  --output_excel results/predictions.xlsx
+python Classifier.py \
+  --input_xlsx path/to/Extracted_features_dataset.xlsx \
+  --output_xlsx path/to/Output.xlsx \
+  --test_size 0.5 \
+  --seed 42
 ```
