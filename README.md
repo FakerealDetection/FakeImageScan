@@ -21,7 +21,14 @@ A mismatch between these two signals provides a powerful cue for identifying syn
 
 ## 🔍 Framework Overview
 
-![FakeImageScan Framework Overview](assets/Overview.png)
+<p align="left">
+    <img src="overview.PNG" alt="FakeImageScan Framework Overview" width="500">
+</p>
+
+## 🔍 Framework Overview
+
+FakeImageScan consists of **two complementary pathways**:
+
 
 FakeImageScan consists of **two complementary pathways**:
 
