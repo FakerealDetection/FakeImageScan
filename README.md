@@ -1,24 +1,59 @@
-# Replication package for paper "Detecting Data Contamination with Data’s Naturalnes and Data Complete"
+# FakeImageScan  
+**Beyond Visual Artifacts: Detecting AI-Generated Images via Model Affinity and Task Difficulty**
 
-![Overview](Overview.PNG)
+FakeImageScan is a **dual-pathway framework** for detecting AI-generated images produced by **GANs and diffusion models**.  
+Instead of relying on fragile visual artifacts, FakeImageScan exploits **model affinity** and **task difficulty** signals to achieve **robust, generator-agnostic detection**.
 
+---
 
+## 📌 Key Idea
 
-This repository contains the code, datasets, and resources for the research paper **"Detecting Data Contamination with Data’s Naturalnes and Data Complete"**. The proposed method, **Natural-DaCoDe**, uses naturalness scores of source code to detect whether a given piece of code has been used to train deep learning models, particularly code completion models.
+> **AI-generated images are more compatible with AI models than real images.**
 
-## Project Overview
-The objective of this project is to provide a novel approach to detecting data contamination in deep learning models. By leveraging the **naturalness** of source code and combining it with the model’s performance, this approach significantly outperforms traditional methods for detecting whether a piece of code has been used for model training.
-## Features
-- Detection of contaminated vs. cleaned datasets using naturalness and model performance.
-- Works for code completion models and method name suggestion tasks.
-- Code and dataset collection for constructing contaminated (𝐶𝑇𝑑𝑎𝑡𝑎) and cleaned (𝐶𝐿𝑑𝑎𝑡𝑎) datasets.
+FakeImageScan detects this asymmetry by jointly measuring:
 
-## Directory Structure
+- **How well AI models perform on an image** (*Model Affinity*), and  
+- **How difficult the image should be for those tasks** (*Task Difficulty*).
 
-This section provides an overview of the repository structure, including datasets, and the source code of the Code Completion models: [Dataset](https://drive.google.com/file/d/1QheSAfupFNCq_V4q4a4Mt8uHNDl_gpC2/view?usp=sharing),[UniXcoder](https://github.com/naturalnessbasedappraoch/Natural-DaCode/tree/main/Source_code/UniXcoder), [CodeParrot](https://github.com/naturalnessbasedappraoch/Natural-DaCode/tree/main/Source_code/CodeParrot), and [Ngram Model](https://github.com/naturalnessbasedappraoch/Natural-DaCode/tree/main/Source_code/n-gram_cachelm).
-![Overview](directories.PNG)
+A mismatch between these two signals provides a powerful cue for identifying synthetic images.
 
-# Dataset for Code Completion and N-gram Models
-<p align="center">
-    <img src="DatasetGraph.PNG" alt="TestingDataset" width="600">
-</p>
+---
+
+## 🔍 Framework Overview
+
+FakeImageScan consists of **two complementary pathways**:
+
+### 1️⃣ Model Affinity Pathway (Performance Signals)
+
+Measures how confidently AI models process an image.
+
+- **Inpainting Accuracy (A)**  
+  Evaluates reconstruction fidelity using **SSIM** after masked inpainting.  
+  AI-generated images tend to be reconstructed with unusually high accuracy.
+
+- **Segmentation Confidence (S)**  
+  Measures average **per-pixel confidence** from a semantic segmentation model.  
+  Synthetic images often produce over-confident and spatially uniform predictions.
+
+---
+
+### 2️⃣ Task Difficulty Pathway (Context Signals)
+
+Estimates how challenging the image should be for vision models.
+
+- **Pixel Naturalness (N)**  
+  Quantifies pixel-level predictability using global and local probability models.
+
+- **Image Complexity (C)**  
+  Combines multiple structural and statistical cues, including:
+  - Edge density  
+  - Texture variance  
+  - Entropy  
+  - Frequency-domain characteristics  
+
+---
+
+## 🧠 Feature Vector
+
+For each image **I**, FakeImageScan extracts a **4D feature vector**:
+
