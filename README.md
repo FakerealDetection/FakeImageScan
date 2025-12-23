@@ -55,7 +55,35 @@ Estimates how challenging the image should be for vision models.
 
 ---
 
+### dataset structure
+```plaintext
+data/
+├── Real/
+│ ├── image1.png
+│ ├── image2.png
+│ ├── image3.png
+│ └── ...
+└── AI_generated/
+├── image1.png
+├── image2.png
+├── image3.png
+└── ...
+```
+
+---
+
 ## 🧠 Feature Vector
 
 For each image **I**, FakeImageScan extracts a **4D feature vector**:
+
+**x(I) = [ A(I), S(I), N(I), C(I) ]**
+
+Where:
+- **A(I)** — Inpainting Accuracy (SSIM-based)
+- **S(I)** — Segmentation Confidence
+- **N(I)** — Pixel Naturalness
+- **C(I)** — Image Complexity
+
+Final classification is performed using a **Support Vector Machine (SVM)** with an **RBF kernel**.
+
 
