@@ -96,13 +96,15 @@ Real images contain sensor noise and physical irregularities, while AI-generated
 
 ---
 
-### 🔹 Image Complexity (C)
-Quantifies structural and statistical richness using multiple cues, including:
-- Edge density  
-- Gradient magnitude  
-- Texture variance  
-- Shannon entropy  
-- Frequency-domain characteristics  
+### 🔹 Image Complexity
+
+Compute image complexity by aggregating multiple structural and statistical cues, including edge density, texture variance, entropy, and frequency-domain characteristics:
+
+```bash
+python complexity.py \
+  --input_dir /path/to/images \
+  --output_csv results/complexity.csv
+``` 
 
 **Purpose:**  
 Image complexity normalizes model performance and prevents visually simple images from being falsely flagged.
