@@ -58,7 +58,7 @@ This pathway measures how confidently AI models process an image.
 Compute inpainting accuracy by comparing the original image with the inpainted (completed) image using **SSIM**:
 
 ```bash
-python SSIM.py \
+python Accuracy.py \
   --original_dir /path/to/img_org \
   --completed_dir /path/to/img_out \
   --output_dir /path/to/output
