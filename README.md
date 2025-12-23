@@ -2,16 +2,15 @@
 **Beyond Visual Artifacts: Detecting AI-Generated Images via Model Affinity and Task Difficulty**
 
 FakeImageScan is a **dual-pathway framework** for detecting AI-generated images produced by **GANs and diffusion models**.  
-Instead of relying on fragile visual artifacts, FakeImageScan exploits **model affinity** and **task difficulty** signals to achieve **robust, generator-agnostic detection**.
+Instead of relying on fragile visual artifacts or generator-specific fingerprints, FakeImageScan exploits **model affinity** and **task difficulty** signals to achieve **robust, generator-agnostic detection**.
 
 ---
 
-## 📌 Key Idea
+## 📌 Key Insight
 
-> **AI-generated images are more compatible with AI models than real images.**
+> **AI-generated images are intrinsically more compatible with AI vision models than real images.**
 
 FakeImageScan detects this asymmetry by jointly measuring:
-
 - **How well AI models perform on an image** (*Model Affinity*), and  
 - **How difficult the image should be for those tasks** (*Task Difficulty*).
 
@@ -21,69 +20,77 @@ A mismatch between these two signals provides a powerful cue for identifying syn
 
 ## 🔍 Framework Overview
 
-![Framework_overview](Overview.PNG)
+![Framework Overview](Overview.PNG)
 
-FakeImageScan consists of **two complementary pathways**:
-
-### 1️⃣ Model Affinity Pathway (Performance Signals)
-
-Measures how confidently AI models process an image.
-
-- **Inpainting Accuracy (A)**  
-  Evaluates reconstruction fidelity using **SSIM** after masked inpainting.  
-  AI-generated images tend to be reconstructed with unusually high accuracy.
-
-- **Segmentation Confidence (S)**  
-  Measures average **per-pixel confidence** from a semantic segmentation model.  
-  Synthetic images often produce over-confident and spatially uniform predictions.
+FakeImageScan consists of **two complementary pathways** that operate in parallel on each input image.
 
 ---
 
-### 2️⃣ Task Difficulty Pathway (Context Signals)
+## 📁 Dataset Structure
 
-Estimates how challenging the image should be for vision models.
+The dataset follows a **binary folder structure** with two classes: **Real** and **AI-Generated** images.
 
-- **Pixel Naturalness (N)**  
-  Quantifies pixel-level predictability using global and local probability models.
-
-- **Image Complexity (C)**  
-  Combines multiple structural and statistical cues, including:
-  - Edge density  
-  - Texture variance  
-  - Entropy  
-  - Frequency-domain characteristics  
-
----
-
-### dataset structure
 ```plaintext
 data/
 ├── Real/
-│ ├── image1.png
-│ ├── image2.png
-│ ├── image3.png
-│ └── ...
+│   ├── image1.png
+│   ├── image2.png
+│   ├── image3.png
+│   └── ...
 └── AI_generated/
-├── image1.png
-├── image2.png
-├── image3.png
-└── ...
-```
+    ├── image1.png
+    ├── image2.png
+    ├── image3.png
+    └── ...
+### 🔍 Feature Semantics
+
+The four-dimensional feature vector is derived from two complementary pathways that capture **model behavior** and **task context**.
 
 ---
 
-## 🧠 Feature Vector
+## 1️⃣ Model Affinity Pathway (Performance Signals)
 
-For each image **I**, FakeImageScan extracts a **4D feature vector**:
+This pathway measures how confidently AI models process an image.
 
-**x(I) = [ A(I), S(I), N(I), C(I) ]**
+### 🔹 Inpainting Accuracy (A)
+- A region of the image is intentionally masked.
+- A pretrained image inpainting model reconstructs the missing region.
+- Reconstruction fidelity is measured using **SSIM (Structural Similarity Index)**.
 
-Where:
-- **A(I)** — Inpainting Accuracy (SSIM-based)
-- **S(I)** — Segmentation Confidence
-- **N(I)** — Pixel Naturalness
-- **C(I)** — Image Complexity
+**Observation:**  
+AI-generated images tend to be reconstructed with **unusually high accuracy** due to their structural regularity and lack of physical noise.
 
-Final classification is performed using a **Support Vector Machine (SVM)** with an **RBF kernel**.
+---
 
+### 🔹 Segmentation Confidence (S)
+- A semantic segmentation model processes the image.
+- The **average per-pixel maximum class probability** is computed.
 
+**Observation:**  
+Synthetic images often produce **over-confident and spatially uniform segmentation predictions**, reflecting unnaturally clean boundaries and simplified textures.
+
+---
+
+## 2️⃣ Task Difficulty Pathway (Context Signals)
+
+This pathway estimates how challenging the image *should be* for vision models.
+
+### 🔹 Pixel Naturalness (N)
+- Measures pixel-level predictability using a combination of **global and local probability models**.
+- Captures how statistically “natural” an image is.
+
+**Interpretation:**  
+Real images contain sensor noise and physical irregularities, while AI-generated images exhibit higher predictability.
+
+---
+
+### 🔹 Image Complexity (C)
+Quantifies structural and statistical richness using multiple cues, including:
+- Edge density  
+- Gradient magnitude  
+- Texture variance  
+- Shannon entropy  
+- Frequency-domain characteristics  
+
+**Purpose:**  
+Image complexity normalizes model performance and prevents visually simple images from being falsely flagged.
