@@ -111,7 +111,7 @@ python complexity.py \
 ``` 
 
 
-### 🔹 Feature Fusion & Classification (SVM)
+## 🔍 Feature Fusion & Classification (SVM)
 
 Perform final classification by fusing all extracted features and training an **SVM with an RBF kernel**:
 
