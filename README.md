@@ -42,6 +42,7 @@ data/
     ├── image2.png
     ├── image3.png
     └── ...
+```
 ### 🔍 Feature Semantics
 
 The four-dimensional feature vector is derived from two complementary pathways that capture **model behavior** and **task context**.
