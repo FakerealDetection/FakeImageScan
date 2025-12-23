@@ -25,10 +25,6 @@ A mismatch between these two signals provides a powerful cue for identifying syn
 
 FakeImageScan consists of **two complementary pathways**:
 
-
-FakeImageScan consists of **two complementary pathways**:
-
-
 ### 1️⃣ Model Affinity Pathway (Performance Signals)
 
 Measures how confidently AI models process an image.
