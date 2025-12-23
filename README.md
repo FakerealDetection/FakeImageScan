@@ -68,9 +68,15 @@ AI-generated images tend to be reconstructed with **unusually high accuracy** du
 
 ---
 
-### 🔹 Segmentation Confidence (S)
-- A semantic segmentation model processes the image.
-- The **average per-pixel maximum class probability** is computed.
+### 🔹 Segmentation Confidence
+
+Compute segmentation confidence by measuring the average per-pixel probability from a semantic segmentation model:
+
+```bash
+python confidence.py \
+  --input_dir /path/to/images \
+  --output_csv results/confidence.csv
+```
 
 **Observation:**  
 Synthetic images often produce **over-confident and spatially uniform segmentation predictions**, reflecting unnaturally clean boundaries and simplified textures.
