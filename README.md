@@ -21,7 +21,10 @@ A mismatch between these two signals provides a powerful cue for identifying syn
 
 ## 🔍 Framework Overview
 
+![FakeImageScan Framework Overview](assets/Overview.png)
+
 FakeImageScan consists of **two complementary pathways**:
+
 
 ### 1️⃣ Model Affinity Pathway (Performance Signals)
 
