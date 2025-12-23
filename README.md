@@ -95,3 +95,13 @@ Quantifies structural and statistical richness using multiple cues, including:
 
 **Purpose:**  
 Image complexity normalizes model performance and prevents visually simple images from being falsely flagged.
+
+## ▶️ Run FakeImageScan (Excel Input & Output)
+
+FakeImageScan supports loading **precomputed feature vectors from an Excel file** and saving **classification results to a new Excel file**.
+
+```bash
+python run_fakeimagescan.py \
+  --input_excel data/features.xlsx \
+  --output_excel results/predictions.xlsx
+```
