@@ -87,14 +87,18 @@ Synthetic images often produce **over-confident and spatially uniform segmentati
 
 This pathway estimates how challenging the image *should be* for vision models.
 
-### 🔹 Pixel Naturalness (N)
-- Measures pixel-level predictability using a combination of **global and local probability models**.
-- Captures how statistically “natural” an image is.
+### 🔹 Pixel Naturalness
 
-**Interpretation:**  
-Real images contain sensor noise and physical irregularities, while AI-generated images exhibit higher predictability.
+Compute pixel naturalness by measuring local and global pixel predictability using a learned reconstruction model:
 
----
+```bash
+python Naturalness.py \
+  --input_dir /path/to/images \
+  --load /path/to/srec_checkpoint.pth \
+  --output_csv /path/to/naturalness.csv \
+  --gpu_id 0
+
+```
 
 ### 🔹 Image Complexity
 
@@ -106,8 +110,6 @@ python complexity.py \
   --output_csv results/complexity.csv
 ``` 
 
-**Purpose:**  
-Image complexity normalizes model performance and prevents visually simple images from being falsely flagged.
 
 ## ▶️ Run FakeImageScan (Excel Input & Output)
 
