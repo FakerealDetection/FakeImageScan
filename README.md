@@ -55,7 +55,8 @@ This pathway measures how confidently AI models process an image.
 
 ### 🔹 Inpainting Accuracy (SSIM-based)
 
-Compute inpainting accuracy by comparing the original image with the inpainted (completed) image using **SSIM**:
+Compute inpainting accuracy by comparing the original image with the inpainted (completed) image using **SSIM**.  
+Inpainting is performed using **[Pluralistic Inpainting](https://github.com/lyndonzheng/Pluralistic-Inpainting/tree/master)**.
 
 ```bash
 python Accuracy.py \
