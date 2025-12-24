@@ -26,7 +26,15 @@ FakeImageScan consists of **two complementary pathways** that operate in paralle
 
 ---
 
-## 📁 Dataset Structure
+## 📁 Dataset
+
+The FakeImageScan dataset is publicly available and can be downloaded from the link below:
+
+👉 **[Download Dataset](https://drive.google.com/file/d/1ZQOSA7dLzupo2OOEqztl6VcHXm3lkvdS/view?usp=sharing)**
+
+---
+
+### 📂 Dataset Structure
 
 The dataset follows a **binary folder structure** with two classes: **Real** and **AI-Generated** images.
 
