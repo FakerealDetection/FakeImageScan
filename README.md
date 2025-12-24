@@ -90,7 +90,10 @@ This pathway estimates how challenging the image *should be* for vision models.
 
 ### 🔹 Pixel Naturalness
 
-Compute pixel naturalness by measuring local and global pixel predictability using a learned reconstruction model:
+Compute pixel naturalness by measuring local and global pixel predictability using a learned reconstruction model.  
+Pixel naturalness is estimated using the **[SReC model](https://github.com/caoscott/SReC/tree/master)**.
+
+
 
 ```bash
 python Naturalness.py \
