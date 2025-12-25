@@ -58,7 +58,7 @@ class SReCModel(torch.nn.Module):
 
 
 # ============================================================
-# Likelihood: Gaussian log-prob of observed pixel given (mu, sigma)
+# Gaussian log-prob of observed pixel given (mu, sigma)
 # ============================================================
 def gaussian_log_prob(x: torch.Tensor, mu: torch.Tensor, log_sigma: torch.Tensor) -> torch.Tensor:
     """
@@ -164,7 +164,7 @@ def extract_true_pixel(img: torch.Tensor, x: int, y: int) -> torch.Tensor:
 
 
 # ============================================================
-# Pixel naturalness = λ p_global + (1-λ) p_local  (Eq. 1)
+# Pixel naturalness = λ p_global + (1-λ) p_local 
 # ============================================================
 @torch.no_grad()
 def compute_image_naturalness(model, image_path: str, lambda_factor=0.5, fast_mode=False) -> float:
@@ -331,3 +331,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(args)
+
