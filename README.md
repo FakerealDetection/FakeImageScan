@@ -21,7 +21,7 @@ A mismatch between these two signals provides a powerful cue for identifying syn
 ## 🔍 Framework Overview
 
 <p align="left">
-  <img src="Overview.PNG" alt="Framework Overview" width="600">
+  <img src="Overview.PNG" alt="Framework Overview" width="700">
 </p>
 
 FakeImageScan consists of **two complementary pathways** that operate in parallel on each input image.
