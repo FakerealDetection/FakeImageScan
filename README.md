@@ -41,15 +41,23 @@ The dataset follows a **binary folder structure** with two classes: **Real** and
 ```plaintext
 data/
 ├── Real/
-│   ├── image1.png
-│   ├── image2.png
-│   ├── image3.png
-│   └── ...
+│   ├── Training/
+│   │   ├── image1.png
+│   │   ├── image2.png
+│   │   └── ...
+│   └── Testing/
+│       ├── image1.png
+│       ├── image2.png
+│       └── ...
 └── AI_generated/
-    ├── image1.png
-    ├── image2.png
-    ├── image3.png
-    └── ...
+    ├── Training/
+    │   ├── image1.png
+    │   ├── image2.png
+    │   └── ...
+    └── Testing/
+        ├── image1.png
+        ├── image2.png
+        └── ...
 ```
 ### 🔍 Feature Semantics
 
