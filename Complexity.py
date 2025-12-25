@@ -96,3 +96,4 @@ def compute_complexity(features: Dict[str, List[float]]) -> np.ndarray:
 
     complexity_norm = minmax(complexity_raw)
     return complexity_norm
+
