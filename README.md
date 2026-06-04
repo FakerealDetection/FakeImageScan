@@ -6,7 +6,7 @@ Instead of relying on fragile visual artifacts or generator-specific fingerprint
 
 ---
 
-## 📌 Key Insight
+## 📌 Key Insight 
 
 > **AI-generated images are intrinsically more compatible with AI vision models than real images.**
 
