@@ -21,12 +21,12 @@ def load_images(original_path, completed_path):
     return original, completed
 
 
-def create_center_mask(image_shape):
+def create_center_mask(image_shape, mask_size=162):
     """
     Create a fixed 10% central region mask
     """
     h, w = image_shape[:2]
-    ch, cw = int(h * 0.10), int(w * 0.10)
+    ch, cw = mask_size, mask_size  
 
     y0 = (h - ch) // 2
     x0 = (w - cw) // 2
@@ -36,10 +36,9 @@ def create_center_mask(image_shape):
     return mask
 
 
-def calculate_ssim(original, completed, mask):
-    original_gray = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
-    completed_gray = cv2.cvtColor(completed, cv2.COLOR_BGR2GRAY)
 
+def calculate_ssim(original, completed, mask):
+    # Crop RGB images directly without converting to grayscale
     ys, xs = np.where(mask > 0)
     if len(xs) == 0:
         return float("nan")
@@ -47,12 +46,13 @@ def calculate_ssim(original, completed, mask):
     y0, y1 = ys.min(), ys.max() + 1
     x0, x1 = xs.min(), xs.max() + 1
 
+    # skimage ssim with channel_axis for RGB images
     return ssim(
-        original_gray[y0:y1, x0:x1],
-        completed_gray[y0:y1, x0:x1],
-        data_range=255
+        original[y0:y1, x0:x1],
+        completed[y0:y1, x0:x1],
+        data_range=255,
+        channel_axis=-1  # Averaged across RGB channels
     )
-
 
 def main(args):
     os.makedirs(args.output_dir, exist_ok=True)
